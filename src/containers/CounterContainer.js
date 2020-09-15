@@ -1,15 +1,18 @@
 // container component: 상태관리를 위한 컴포넌트
 import React from 'react';
 import Counter from '../components/Counter';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { increase, decrease, setDiff } from '../modules/counter';
 
 function CounterContainer() {
   // 상태 불러오기 (useSelector)
-  const { number, diff } = useSelector((state) => ({
-    number: state.counter.number,
-    diff: state.counter.diff,
-  }));
+  const { number, diff } = useSelector(
+    (state) => ({
+      number: state.counter.number,
+      diff: state.counter.diff,
+    }),
+    shallowEqual,
+  );
 
   // dispatch
   const dispatch = useDispatch();
